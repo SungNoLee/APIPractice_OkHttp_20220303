@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             val inputId = binding.edtId.text.toString()
             val inputPw = binding.edtPassword.text.toString()
-//            API서버에 아이디/비번
+//            API서버에 아이디/비번을 보내서
         }
     }
 
