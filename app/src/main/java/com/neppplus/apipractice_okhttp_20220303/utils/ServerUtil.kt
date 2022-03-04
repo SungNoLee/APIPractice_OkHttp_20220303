@@ -63,6 +63,12 @@ class ServerUtil {
                     val code = jsonObj.getInt("code")
                     if (code == 200) {
                         Log.d("로그 코드값", "성공")
+
+                        val dataObj = jsonObj.getJSONObject("data")
+                        val userObj = dataObj.getJSONObject("user")
+
+                        val nickname = userObj.getString("nick_name")
+                        Log.d("로그인한 사람의 닌네임 :",nickname)
                     }
                     else {
                         Log.d("로그인시도", "실패")
