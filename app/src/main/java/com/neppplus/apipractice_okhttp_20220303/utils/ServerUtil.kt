@@ -101,5 +101,9 @@ class ServerUtil {
 
             })
         }
+
+    fun putRequestSignUp(email: String, pw: String, nickname: String, handler: () -> ServerUtil.JsonResponseHandler) {
+
     }
+}
 }
