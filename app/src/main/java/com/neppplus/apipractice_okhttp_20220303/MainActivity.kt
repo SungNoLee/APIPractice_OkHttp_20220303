@@ -8,7 +8,7 @@ import com.neppplus.apipractice_okhttp_20220303.databinding.ActivityMainBinding
 import com.neppplus.apipractice_okhttp_20220303.utils.ServerUtil
 import org.json.JSONObject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity :  BaseActivity() {
     lateinit var binding : ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun setupEvents() {
+    override fun setupEvents() {
         binding.btnLogin.setOnClickListener {
             val inputId = binding.edtId.text.toString()
             val inputPw = binding.edtPassword.text.toString()
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun setValues() {
+    override fun setValues() {
 
     }
 }
