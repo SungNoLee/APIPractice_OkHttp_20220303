@@ -34,14 +34,14 @@ class MainActivity :  BaseActivity() {
                     val code = jsonObject.getInt("code")
                     if (code == 200) {
                         runOnUiThread {
-                            Toast.makeText(this@MainActivity, "로그인 성공", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(mContext, "로그인 성공", Toast.LENGTH_SHORT).show()
                         }
                     }
                     else {
                         val message = jsonObject.getString("message")
 //                        토스트 : UI 조작. => 백그라운드에서 UI를 건드리면
                         runOnUiThread {
-                            Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
