@@ -1,5 +1,6 @@
 package com.neppplus.apipractice_okhttp_20220303.utils
 
+import android.provider.ContactsContract
 import android.util.Log
 import okhttp3.*
 import org.json.JSONObject
@@ -71,6 +72,21 @@ class ServerUtil {
                 }
 
             })
+        }
+
+        fun putRequestSignUp(email: String, pw: String, nickname:String, handler: JsonResponseHandler?) {
+            val urlString = "${BASE_URL}/user"
+
+            val formData = FormBody.Builder()
+                .add("email", email)
+                .add("password", pw)
+                .add("nick_name", nickname)
+                .build()
+            val request = Request.Builder()
+                .url(urlString)
+                .put(formData)
+                .build()
+
         }
     }
 }

@@ -20,6 +20,12 @@ class MainActivity :  BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        binding.btnSignUp.setOnClickListener {
+
+
+        }
+
         binding.btnLogin.setOnClickListener {
             val inputId = binding.edtId.text.toString()
             val inputPw = binding.edtPassword.text.toString()
