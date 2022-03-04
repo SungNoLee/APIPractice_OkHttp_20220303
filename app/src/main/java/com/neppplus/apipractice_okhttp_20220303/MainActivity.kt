@@ -38,9 +38,10 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     else {
+                        val message = jsonObject.getString("message")
 //                        토스트 : UI 조작. => 백그라운드에서 UI를 건드리면
                         runOnUiThread {
-                            Toast.makeText(this@MainActivity, "로그인 실패", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
