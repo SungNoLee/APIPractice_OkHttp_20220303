@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.neppplus.apipractice_okhttp_20220303.databinding.ActivityLoginBinding
+import com.neppplus.apipractice_okhttp_20220303.utils.ContextUtil
 import com.neppplus.apipractice_okhttp_20220303.utils.ServerUtil
 import org.json.JSONObject
 
@@ -49,6 +50,7 @@ class LoginActivity :  BaseActivity() {
                         val token = dataObj.getString("token")
 //                        변수에 담진 토큰값(String)을 SharedPreference에 담아두자.
 //                        로그인 성공시에는 담기만 필요한 화면에서 커내서 사용
+                        ContextUtil.setToken()
 
                         val myIntent = Intent(mContext, MainActivity::class.java)
                         startActivity(myIntent)
@@ -69,6 +71,7 @@ class LoginActivity :  BaseActivity() {
     }
 
     override fun setValues() {
+//        이전에 설정한 자동로그인 여부를 미리 체크해두자.
 
     }
 }

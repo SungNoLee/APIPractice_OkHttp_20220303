@@ -11,6 +11,8 @@ import org.json.JSONObject
 
 class SignUpActivity : BaseActivity() {
     lateinit var binding: ActivitySignUpBinding
+    var dupEmailCheck = false
+    var dupNickname = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +22,7 @@ class SignUpActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
         binding.edtNickname.addTextChangedListener {
             Log.d("입력내용", it.toString())
 //            내용이 한글자라도 변경되면 재검사 요구 문장.
@@ -44,9 +47,11 @@ class SignUpActivity : BaseActivity() {
                         when(code) {
                             200 -> {
                                 binding.txtEmailCheckResult.text = "사용해도 좋은 이메일입니다."
+                                dupEmailCheck = true
                             }
                             else -> {
                                 binding.txtEmailCheckResult.text = "다른 이메일로 다시 시도해 주세요."
+                                dupEmailCheck = false
                             }
                         }
                     }
@@ -68,9 +73,11 @@ class SignUpActivity : BaseActivity() {
                         when(code) {
                             200 -> {
                                 binding.txtNicknameCheckResult.text = "사용해도 좋은 닉네임입니다."
+                                dupNickname = true
                             }
                             else -> {
                                 binding.txtNicknameCheckResult.text = "다른 닉네임으로 다시 시도해 주세요."
+                                dupNickname = false
                             }
                         }
                     }
@@ -82,7 +89,14 @@ class SignUpActivity : BaseActivity() {
 //            [도전과제] 만약 이메일/닌네임 중복검사를 통과하지 못한 상태라면
 //            토스트로 "이메일 중복검사를 통과해야 합니다." 등의 문구만 출력, 가입진행 X
 //            hint) 진행할 상황이 아니라면, return 처리하면 함수 종료.
-            
+            if(!dupEmailCheck or !dupNickname) {
+                if (!dupEmailCheck) {
+                    Toast.makeText(mContext, "이메일 중복검사를 통과해야 합니다.", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(mContext, "닉네임 중복검사를 통과해야 합니다.", Toast.LENGTH_SHORT).show()
+                }
+                return@setOnClickListener
+            }
             val inputEmail = binding.edtEmail.text.toString()
             val inputPass = binding.edtPassword.text.toString()
             val inputNickname = binding.edtNickname.text.toString()

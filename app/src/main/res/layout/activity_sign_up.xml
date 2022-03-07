@@ -49,6 +49,7 @@
             android:id="@+id/edtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPassword"
             android:hint="8글자 이상"/>
         <TextView
             android:layout_width="match_parent"
@@ -84,6 +85,6 @@
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="회원가입 하기"/>
+            android:text="회원 가입"/>
     </LinearLayout>
 </layout>
