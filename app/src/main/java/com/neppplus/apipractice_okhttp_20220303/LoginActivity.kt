@@ -43,8 +43,13 @@ class LoginActivity :  BaseActivity() {
                         val userObj = dataObj.getJSONObject("user")
                         val nickname = userObj.getString("nick_name")
                         runOnUiThread {
-                            Toast.makeText(mContext, "로그인 성공", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(mContext, "${nickname}님로그인 성공", Toast.LENGTH_SHORT).show()
                         }
+//                        서버에서 내려준 토큰값을 변수에 담아둔다.
+                        val token = dataObj.getString("token")
+//                        변수에 담진 토큰값(String)을 SharedPreference에 담아두자.
+//                        로그인 성공시에는 담기만 필요한 화면에서 커내서 사용
+
                         val myIntent = Intent(mContext, MainActivity::class.java)
                         startActivity(myIntent)
                     }

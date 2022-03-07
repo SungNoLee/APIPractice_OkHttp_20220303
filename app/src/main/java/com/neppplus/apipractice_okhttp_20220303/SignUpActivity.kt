@@ -20,6 +20,11 @@ class SignUpActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+        binding.edtNickname.addTextChangedListener {
+            Log.d("입력내용", it.toString())
+//            내용이 한글자라도 변경되면 재검사 요구 문장.
+            binding.txtNicknameCheckResult.text = "중복 확인을 해주세요."
+        }
         binding.edtEmail.addTextChangedListener {
             Log.d("입력내용", it.toString())
 //            내용이 한글자라도 변경되면 재검사 요구 문장.
@@ -74,6 +79,10 @@ class SignUpActivity : BaseActivity() {
             })
         }
         binding.btnSignUp.setOnClickListener {
+//            [도전과제] 만약 이메일/닌네임 중복검사를 통과하지 못한 상태라면
+//            토스트로 "이메일 중복검사를 통과해야 합니다." 등의 문구만 출력, 가입진행 X
+//            hint) 진행할 상황이 아니라면, return 처리하면 함수 종료.
+            
             val inputEmail = binding.edtEmail.text.toString()
             val inputPass = binding.edtPassword.text.toString()
             val inputNickname = binding.edtNickname.text.toString()
