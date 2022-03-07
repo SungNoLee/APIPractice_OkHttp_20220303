@@ -49,6 +49,30 @@ class SignUpActivity : BaseActivity() {
 
             })
         }
+        binding.btnNickCheck.setOnClickListener {
+//            입력 이메일 값 추출
+            val inputNickname = binding.edtNickname.text.toString()
+//            서버의 중복확인 기능(user_check - GET) API 활용 > ServerUtil에 함수 추가, 가져다 활용.
+//            그 응답 code값에 따라 다은 문구 배치.
+//            obect 는 익명 클래스
+            ServerUtil.getRequestDuplicatedCheck("NICK_NAME", inputNickname, object : ServerUtil.JsonResponseHandler{
+                override fun onResponse(jsonObj: JSONObject) {
+                    val code = jsonObj.getInt("code")
+
+                    runOnUiThread {
+                        when(code) {
+                            200 -> {
+                                binding.txtNicknameCheckResult.text = "사용해도 좋은 닉네임입니다."
+                            }
+                            else -> {
+                                binding.txtNicknameCheckResult.text = "다른 닉네임으로 다시 시도해 주세요."
+                            }
+                        }
+                    }
+                }
+
+            })
+        }
         binding.btnSignUp.setOnClickListener {
             val inputEmail = binding.edtEmail.text.toString()
             val inputPass = binding.edtPassword.text.toString()
