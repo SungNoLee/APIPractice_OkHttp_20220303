@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.neppplus.apipractice_okhttp_20220303.databinding.ActivityMainBinding
 import com.neppplus.apipractice_okhttp_20220303.utils.ServerUtil
+import org.json.JSONObject
 
 class MainActivity : BaseActivity() {
     lateinit var binding : ActivityMainBinding
@@ -18,7 +19,19 @@ class MainActivity : BaseActivity() {
     }
 
     override fun setValues() {
-        // ServerUtil.getRequestDuplicatedCheck()
+        ServerUtil.getRequestMyInfo(mContext, object : ServerUtil.JsonResponseHandler{
+            override fun onResponse(jsonObject: JSONObject) {
+                val dataObj = jsonObject.getJSONObject("data")
+                val userObj = dataObj.getJSONObject("user")
+                val nickname = userObj.getString("nick_name")
+                runOnUiThread {
+                    binding.txtLoginUserName.text = nickname
+                }
+            }
+
+        })
+
+        }
     }
 
 }
