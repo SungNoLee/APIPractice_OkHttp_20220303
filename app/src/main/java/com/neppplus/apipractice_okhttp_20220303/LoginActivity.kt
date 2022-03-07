@@ -39,9 +39,14 @@ class LoginActivity :  BaseActivity() {
 
                     val code = jsonObject.getInt("code")
                     if (code == 200) {
+                        val dataObj = jsonObject.getJSONObject("data")
+                        val userObj = dataObj.getJSONObject("user")
+                        val nickname = userObj.getString("nick_name")
                         runOnUiThread {
                             Toast.makeText(mContext, "로그인 성공", Toast.LENGTH_SHORT).show()
                         }
+                        val myIntent = Intent(mContext, MainActivity::class.java)
+                        startActivity(myIntent)
                     }
                     else {
                         val message = jsonObject.getString("message")
