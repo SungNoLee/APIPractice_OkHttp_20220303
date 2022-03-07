@@ -3,6 +3,7 @@ package com.neppplus.apipractice_okhttp_20220303.utils
 import android.provider.ContactsContract
 import android.util.Log
 import okhttp3.*
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import org.json.JSONObject
 import java.io.IOException
 
@@ -102,8 +103,20 @@ class ServerUtil {
             })
         }
 
-    fun putRequestSignUp(email: String, pw: String, nickname: String, handler: () -> ServerUtil.JsonResponseHandler) {
+//      중복 체크
+        fun getRequestDuplicatedCheck( type: String, inputValue:String, handler: JsonResponseHandler? ) {
 
+//            1) 어느 주소로 가야하는가? + 어떤 파라미터를 첨부하는가 도 주소에 같이 포함.
+//              => 라이브러리의 도움을 받자.   HttpUrl 클래스(OkHttp 소속)
+            val urlBuilder = "${BASE_URL}/user_check".toHttpUrlOrNull()!!.newBuilder()
+                .addEncodedQueryParameter("type", type)
+                .addEncodedQueryParameter("value", inputValue)
+                .build()
+
+            val urlString = urlBuilder.toString()
+
+            Log.d("중복확인", urlString)
+
+        }
     }
-}
 }
