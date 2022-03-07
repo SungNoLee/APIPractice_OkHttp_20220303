@@ -50,7 +50,7 @@ class LoginActivity :  BaseActivity() {
                         val token = dataObj.getString("token")
 //                        변수에 담진 토큰값(String)을 SharedPreference에 담아두자.
 //                        로그인 성공시에는 담기만 필요한 화면에서 커내서 사용
-                        ContextUtil.setToken()
+                        // ContextUtil.setToken()
 
                         val myIntent = Intent(mContext, MainActivity::class.java)
                         startActivity(myIntent)
@@ -72,6 +72,6 @@ class LoginActivity :  BaseActivity() {
 
     override fun setValues() {
 //        이전에 설정한 자동로그인 여부를 미리 체크해두자.
-
+        binding.autoLoginCheckBox.isChecked = ContextUtil.getAutoLogin(mContext)
     }
 }
