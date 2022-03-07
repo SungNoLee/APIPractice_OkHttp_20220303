@@ -2,6 +2,7 @@ package com.neppplus.apipractice_okhttp_20220303
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.neppplus.apipractice_okhttp_20220303.databinding.ActivityLoginBinding
@@ -22,6 +23,14 @@ class LoginActivity :  BaseActivity() {
 
     override fun setupEvents() {
 
+//        체트박스의 체크 여부가 변경되면(이벤트 처리) > ContextUtil이용, 체크값 저장
+
+        binding.autoLoginCheckBox.setOnCheckedChangeListener { compoundButton, isChecked ->
+            Log.d("체크값변경", "${isChecked}로 변경됨")
+//            연습문제. ContextUtil을 이용해서, true로 변경되면 자동로그인값도 true로 저장
+//            false로 되면, 자동로그인 값도 false로 저장.
+            ContextUtil.setAutoLogin(mContext, isChecked)
+        }
         binding.btnSignUp.setOnClickListener {
             val myIntent = Intent(mContext, SignUpActivity::class.java)
             startActivity(myIntent)
@@ -50,8 +59,9 @@ class LoginActivity :  BaseActivity() {
                         val token = dataObj.getString("token")
 //                        변수에 담진 토큰값(String)을 SharedPreference에 담아두자.
 //                        로그인 성공시에는 담기만 필요한 화면에서 커내서 사용
-                        // ContextUtil.setToken()
+                        ContextUtil.setToken(mContext, token)
 
+//                        메인화면으로 이동
                         val myIntent = Intent(mContext, MainActivity::class.java)
                         startActivity(myIntent)
                     }
