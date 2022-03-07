@@ -1,5 +1,6 @@
 package com.neppplus.apipractice_okhttp_20220303.utils
 
+import android.content.Context
 import android.provider.ContactsContract
 import android.util.Log
 import okhttp3.*
@@ -136,6 +137,13 @@ class ServerUtil {
 
             })
 
+        }
+
+//      토큰은 ContextUtil클래스에서 getToken 함수로 꺼내올 수 있다.
+//      토큰값 자체는 파라미터로 받아올 필요 없다. => ContextUtil을 불러다 사용하자.
+
+        fun getRequestMyInfo(context: Context, handler : JsonResponseHandler? ) {
+            ContextUtil.getToken()
         }
     }
 }
