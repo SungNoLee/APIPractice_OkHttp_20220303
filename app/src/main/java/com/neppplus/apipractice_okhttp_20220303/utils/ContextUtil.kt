@@ -18,5 +18,9 @@ class ContextUtil {
 //            입력 들어온 token 내용 (TOKEN 항목에) 저장
             pref.edit().putString(TOKEN, token).apply()
         }
+        fun getToken(context: Context) : String {
+            val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
+            return pref.getString(TOKEN, "")!!
+        }
     }
 }
