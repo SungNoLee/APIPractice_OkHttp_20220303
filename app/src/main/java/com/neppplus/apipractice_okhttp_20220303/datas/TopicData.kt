@@ -10,6 +10,9 @@ class TopicData : Serializable {
     var imageURL = ""   // 서버 : img_url, 앱 : imageURL 변수명 다른 경우
     var replyConunt = 0
 
+    //    하나의 토론주제 : 여러개의(목록)선택진영
+    val sideList = ArrayList<SideData>()
+
     companion object {
 //    주제 정보을 담고 있는 JSONObject가 들어오면 > TopicData형태로 변환해주는 함수 -> static 메쏘드
         fun getTopicDataFromJson( jsonObj : JSONObject) : TopicData {
@@ -31,7 +34,10 @@ class TopicData : Serializable {
 
                 val sideObj = sidesArr.getJSONObject(i)
 //                sideObj도 sideData로 (선택 진영) 변환.
+                val sideData = SideData.getSideDataFromJson(sideObj)
 
+//                topicData변수의 하위 목록으로 등록.
+                topicData.sideList.add(sideData)
             }
 //            완성된 TopicData 리턴
             return topicData
