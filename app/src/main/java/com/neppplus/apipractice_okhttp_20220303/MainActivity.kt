@@ -1,5 +1,8 @@
 package com.neppplus.apipractice_okhttp_20220303
 
+import android.app.AlertDialog
+import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import com.neppplus.apipractice_okhttp_20220303.adapters.TopicAdapter
 import com.neppplus.apipractice_okhttp_20220303.databinding.ActivityMainBinding
 import com.neppplus.apipractice_okhttp_20220303.datas.TopicData
+import com.neppplus.apipractice_okhttp_20220303.utils.ContextUtil
 import com.neppplus.apipractice_okhttp_20220303.utils.ServerUtil
 import org.json.JSONObject
 
@@ -26,6 +30,29 @@ class MainActivity : BaseActivity() {
         setValues()
     }
     override fun setupEvents() {
+
+        binding.topicListView.setOnItemClickListener { adapterView, view, position, l ->
+            val clickedTopic = mTopicList[position]
+            val myIntent = Intent(mContext, ViewTopicDetailActivity::class.java)
+            myIntent.putExtra("topic", clickedTopic)
+            startActivity(myIntent)
+
+        }
+
+        binding.btnLogout.setOnClickListener {
+            val alert = AlertDialog.Builder(mContext)
+                .setTitle("로그아웃")
+                .setMessage("정말 로구아웃 하시겠습니까?")
+                .setPositiveButton("확인", DialogInterface.OnClickListener { dialog, i ->
+                    ContextUtil.setToken(mContext, "")
+
+                    val myIntent = Intent(mContext, SplashActivity::class.java)
+                    startActivity(myIntent)
+                    finish()
+                })
+                .setNegativeButton("취소", null)
+                .show()
+        }
 
     }
 
