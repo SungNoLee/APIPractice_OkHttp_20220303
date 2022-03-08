@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/kotlin/src/APIPractice_OkHttp_20220303/app/src/main/res/drawable/dark_gray_border_boc.xml" value="0.241" />
+        <entry key="..\:/kotlin/src/APIPractice_OkHttp_20220303/app/src/main/res/drawable/dark_gray_border_box.xml" value="0.241" />
         <entry key="..\:/kotlin/src/APIPractice_OkHttp_20220303/app/src/main/res/layout/activity_base.xml" value="0.36614583333333334" />
         <entry key="..\:/kotlin/src/APIPractice_OkHttp_20220303/app/src/main/res/layout/activity_login.xml" value="0.18489583333333334" />
         <entry key="..\:/kotlin/src/APIPractice_OkHttp_20220303/app/src/main/res/layout/activity_main.xml" value="0.19096509240246407" />
