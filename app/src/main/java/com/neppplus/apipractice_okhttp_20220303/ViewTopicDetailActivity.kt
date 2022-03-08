@@ -6,6 +6,8 @@ import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.neppplus.apipractice_okhttp_20220303.databinding.ActivityViewTopicDetailBinding
 import com.neppplus.apipractice_okhttp_20220303.datas.TopicData
+import com.neppplus.apipractice_okhttp_20220303.utils.ServerUtil
+import org.json.JSONObject
 
 class ViewTopicDetailActivity : BaseActivity() {
     lateinit var binding: ActivityViewTopicDetailBinding
@@ -29,6 +31,21 @@ class ViewTopicDetailActivity : BaseActivity() {
         binding.txtTitle.text = mTopicData.title
         Glide.with(mContext).load(mTopicData.imageURL).into(binding.imgTopicBackground)
 
+        getTopicDetailFromServer()
     }
 
+    fun getTopicDetailFromServer() {
+        ServerUtil.getRequestTopicDetail(mContext, mTopicData.id, object : ServerUtil.JsonResponseHandler{
+            override fun onResponse(jsonObject: JSONObject) {
+                val dataObj = jsonObject.getJSONObject("data")
+                val topicObj = dataObj.getJSONObject("topic")
+//                토론 정보 JSONObject (topicObj) => TopicData() 형태로 변환(여러 화면에서 진행. 함수로 만들어두자)
+                val topicData = TopicData.getTopicDataFromJson(topicObj)
+
+//                변환된 객체를 mTopicData로 다시 대입 => UI 반영도 다시 실행.
+
+            }
+
+        })
+    }
 }

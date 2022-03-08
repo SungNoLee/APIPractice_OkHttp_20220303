@@ -59,7 +59,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="vs"/>
+                        android:layout_marginHorizontal="5dp"
+                        android:textColor="@color/white"
+                        android:text="Vs"/>
 
                     <LinearLayout
                         android:layout_width="wrap_content"

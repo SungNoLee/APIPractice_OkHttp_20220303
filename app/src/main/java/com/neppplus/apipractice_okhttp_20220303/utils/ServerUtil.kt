@@ -194,5 +194,33 @@ class ServerUtil {
         })
 
     }
+
+        fun getRequestTopicDetail(context: Context, topicId:Int, handler : JsonResponseHandler? ) {
+
+            val urlBuilder = "${BASE_URL}/topic/${topicId}".toHttpUrlOrNull()!!.newBuilder()
+                .build()
+
+            val urlString = urlBuilder.toString()
+
+            val request = Request.Builder()
+                .url(urlString)
+                .get()
+                .header( "X-Http-Token", ContextUtil.getToken(context) )   // Context을 통해, 저장된 토큰을 받아와
+                .build()
+            val client = OkHttpClient()
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+
+                }
+
+            override fun onResponse(call: Call, response: Response) {
+                val jsonObj = JSONObject(response.body!!.string())
+                Log.d("서버응답", jsonObj.toString())
+                handler?.onResponse(jsonObj)
+            }
+
+        })
+
+    }
     }
 }
