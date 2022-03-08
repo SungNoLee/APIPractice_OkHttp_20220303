@@ -7,7 +7,7 @@ class ReplyData(
     var content: String
 )  {
 
-    var writer : UserData() // 모든 뎃글에는 작성자가 있다. null 가능성이 없다.
+    var writer = UserData() // 모든 뎃글에는 작성자가 있다. null 가능성이 없다.
 
     var selectedSide = SideData()
 

@@ -2,9 +2,12 @@ package com.neppplus.apipractice_okhttp_20220303
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Adapter
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
+import com.neppplus.apipractice_okhttp_20220303.adapters.ReplyAdapter
 import com.neppplus.apipractice_okhttp_20220303.databinding.ActivityViewTopicDetailBinding
 import com.neppplus.apipractice_okhttp_20220303.datas.ReplyData
 import com.neppplus.apipractice_okhttp_20220303.datas.TopicData
@@ -18,6 +21,8 @@ class ViewTopicDetailActivity : BaseActivity() {
     lateinit var mTopicData : TopicData
 
     val mReplyList = ArrayList<ReplyData>()
+
+    lateinit var mAdapter: ReplyAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +45,7 @@ class ViewTopicDetailActivity : BaseActivity() {
                     runOnUiThread {
                         Toast.makeText(mContext, "${message}", Toast.LENGTH_SHORT).show()
                     }
+                    getTopicDetailFromServer()
                 }
 
             })
@@ -54,15 +60,18 @@ class ViewTopicDetailActivity : BaseActivity() {
                     runOnUiThread {
                         Toast.makeText(mContext, "${message}", Toast.LENGTH_SHORT).show()
                     }
+//                    변경된 득표 현황을 다시 불러오자
+                    getTopicDetailFromServer()
                 }
-
             })
         }
     }
 
     override fun setValues() {
-        binding.txtTitle.text = mTopicData.title
-        Glide.with(mContext).load(mTopicData.imageURL).into(binding.imgTopicBackground)
+        mAdapter = ReplyAdapter(mContext, R.layout.reply_list_item, mReplyList)
+        binding.replyListView.adapter = mAdapter
+
+        setTopicDataToUi()
 
         getTopicDetailFromServer()
     }
@@ -104,6 +113,7 @@ class ViewTopicDetailActivity : BaseActivity() {
         }
 
     }
+    
     fun getTopicDetailFromServer() {
         ServerUtil.getRequestTopicDetail(mContext, mTopicData.id, object : ServerUtil.JsonResponseHandler{
             override fun onResponse(jsonObject: JSONObject) {
@@ -128,6 +138,9 @@ class ViewTopicDetailActivity : BaseActivity() {
 
 //                서버의 동작이므로 어댑터 세팅보다 늦게 끝날수 있다.(notifyDataSetChanged)
 
+                runOnUiThread {
+
+                }
             }
 
         })

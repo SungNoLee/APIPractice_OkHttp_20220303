@@ -198,7 +198,7 @@ class ServerUtil {
         fun getRequestTopicDetail(context: Context, topicId:Int, handler : JsonResponseHandler? ) {
 
             val urlBuilder = "${BASE_URL}/topic/${topicId}".toHttpUrlOrNull()!!.newBuilder()
-                .addEncodedQueryParameter()
+                .addEncodedQueryParameter("order_type", "NEW")  // 댓글도 최신순으로 내려오게 하는 파라미터 추가
                 .build()
 
             val urlString = urlBuilder.toString()
