@@ -17,7 +17,8 @@ import org.json.JSONObject
 
 class MainActivity : BaseActivity() {
     lateinit var binding : ActivityMainBinding
-//    실제로 서버
+    
+//    실제로 서버가 내려주는 주제 목록을 담을 그릇
     val mTopicList = ArrayList<TopicData>()
 
     lateinit var mAdapter : TopicAdapter
@@ -29,6 +30,7 @@ class MainActivity : BaseActivity() {
         setupEvents()
         setValues()
     }
+    
     override fun setupEvents() {
 
         binding.topicListView.setOnItemClickListener { adapterView, view, position, l ->
@@ -40,10 +42,11 @@ class MainActivity : BaseActivity() {
         }
 
         binding.btnLogout.setOnClickListener {
+//            경고장 > 확인시 로그아웃
             val alert = AlertDialog.Builder(mContext)
                 .setTitle("로그아웃")
-                .setMessage("정말 로구아웃 하시겠습니까?")
-                .setPositiveButton("확인", DialogInterface.OnClickListener { dialog, i ->
+                .setMessage("정말 로그아웃 하시겠습니까?")
+                .setPositiveButton("확인", DialogInterface.OnClickListener { dialogInterface, i ->
                     ContextUtil.setToken(mContext, "")
 
                     val myIntent = Intent(mContext, SplashActivity::class.java)
