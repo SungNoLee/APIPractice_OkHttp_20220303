@@ -226,41 +226,41 @@ class ServerUtil {
         fun postRequestVote( context:Context, sideId:Int, handler: JsonResponseHandler? ) {
 //           Request 제작 -> 실제 호출  -> 서버의 응답을 화면에 전달
 //            제작 1) 어느 주소 (url)로 접근할지? => 서버주소 + 기능 주소
-        val urlString = "${BASE_URL}/topic_vote"
+            val urlString = "${BASE_URL}/topic_vote"
 
-        val formData = FormBody.Builder()
-            .add("side_id", sideId.toString())
-            .build()
-//            제작 3) 모든 Request 정보를 종합한 객체 생성. (어는 주소로
-        val request = Request.Builder()
-            .url(urlString)
-            .post(formData)
-            .header("X-Http-Token", ContextUtil.getToken(context))
-            .build()
-//            종합한 Request도 실제 호출을 해 줘야 API 호출이 실행됨.(startActivity 같은 동자 필요함)
-//            실제 호출 : 클라이언트로써 동작 > OkHttpClient 클래스
-        val client = OkHttpClient()
+            val formData = FormBody.Builder()
+                .add("side_id", sideId.toString())
+                .build()
+        //            제작 3) 모든 Request 정보를 종합한 객체 생성. (어는 주소로
+            val request = Request.Builder()
+                .url(urlString)
+                .post(formData)
+                .header("X-Http-Token", ContextUtil.getToken(context))
+                .build()
+        //            종합한 Request도 실제 호출을 해 줘야 API 호출이 실행됨.(startActivity 같은 동자 필요함)
+        //            실제 호출 : 클라이언트로써 동작 > OkHttpClient 클래스
+            val client = OkHttpClient()
 
-//           OkHttpClient 객체를 이용 > 서버에 로그인 기능 실제 호출
-//            호출을 했으면, 서버가 수행한 결과를 받아서 처리.
-//            => 서버에 다녀와서 할 일을 등록 : enqueue(Callback)
+        //           OkHttpClient 객체를 이용 > 서버에 로그인 기능 실제 호출
+        //            호출을 했으면, 서버가 수행한 결과를 받아서 처리.
+        //            => 서버에 다녀와서 할 일을 등록 : enqueue(Callback)
 
-        client.newCall(request).enqueue( object : Callback {
+            client.newCall(request).enqueue( object : Callback {
 
-            override fun onFailure(call: Call, e: IOException) {
-            }
+                override fun onFailure(call: Call, e: IOException) {
+                }
 
-            override fun onResponse(call: Call, response: Response) {
+                override fun onResponse(call: Call, response: Response) {
 
-                val bodyString = response.body!!.string()   // toString() 아님! string() 기능은 1회용.
-                val jsonObj = JSONObject(bodyString)
+                    val bodyString = response.body!!.string()   // toString() 아님! string() 기능은 1회용.
+                    val jsonObj = JSONObject(bodyString)
 
-                Log.d("서버응답", jsonObj.toString())
-                handler?.onResponse(jsonObj)
-            }
+                    Log.d("서버응답", jsonObj.toString())
+                    handler?.onResponse(jsonObj)
+                }
 
-        })
-    }
+            })
+        }
 
     }
 }

@@ -22,7 +22,7 @@ class TopicData : Serializable {
 //            JsonObj에서 데이터 추출>멤버변수 대입
             topicData.id = jsonObj.getInt("id")
             topicData.title = jsonObj.getString("title")
-            topicData.imageURL = jsonObj.getString("imageURL")
+            topicData.imageURL = jsonObj.getString("img_url")
             topicData.replyConunt = jsonObj.getInt("reply_count")
 
 //            sides라는 JSONArray가 들어있음.

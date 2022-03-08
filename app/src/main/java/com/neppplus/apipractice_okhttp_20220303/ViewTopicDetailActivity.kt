@@ -2,6 +2,7 @@ package com.neppplus.apipractice_okhttp_20220303
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.neppplus.apipractice_okhttp_20220303.databinding.ActivityViewTopicDetailBinding
@@ -30,12 +31,29 @@ class ViewTopicDetailActivity : BaseActivity() {
         binding.btnVote1.setOnClickListener {
 //            서버의 투표 API 호출
             ServerUtil.postRequestVote(mContext, mTopicData.sideList[0].id,object :ServerUtil.JsonResponseHandler{
-                override fun onResponse(jsonObject: JSONObject) {
+                override fun onResponse(jsonObj: JSONObject) {
 
+                    val message = jsonObj.getString("message")
+                    runOnUiThread {
+                        Toast.makeText(mContext, "${message}", Toast.LENGTH_SHORT).show()
+                    }
                 }
 
             })
 //            투표 현황 새로고침(응답)
+        }
+
+        binding.btnVote2.setOnClickListener {
+            ServerUtil.postRequestVote(mContext, mTopicData.sideList[1].id,object :ServerUtil.JsonResponseHandler{
+                override fun onResponse(jsonObj: JSONObject) {
+
+                    val message = jsonObj.getString("message")
+                    runOnUiThread {
+                        Toast.makeText(mContext, "${message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+            })
         }
     }
 
