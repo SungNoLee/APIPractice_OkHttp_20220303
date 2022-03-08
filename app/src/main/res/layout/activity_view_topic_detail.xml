@@ -46,6 +46,7 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:orientation="vertical">
                         <TextView
                             android:id="@+id/txtSide1"
@@ -54,6 +55,12 @@
                             android:text="1번진영"
                             android:textSize="17sp"
                             android:textColor="@color/white"/>
+
+                        <TextView
+                            android:id="@+id/txtVoteCount1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0표"/>
 
                     </LinearLayout>
                     <TextView
@@ -66,6 +73,7 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:orientation="vertical">
                         <TextView
                             android:id="@+id/txtSide2"
@@ -74,6 +82,12 @@
                             android:text="2번진영"
                             android:textSize="17sp"
                             android:textColor="@color/white"/>
+
+                        <TextView
+                            android:id="@+id/txtVoteCount2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0표"/>
 
                     </LinearLayout>
                 </LinearLayout>
