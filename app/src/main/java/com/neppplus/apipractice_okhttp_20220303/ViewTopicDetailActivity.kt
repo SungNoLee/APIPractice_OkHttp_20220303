@@ -35,13 +35,16 @@ class ViewTopicDetailActivity : BaseActivity() {
     }
 
     fun setTopicDataToUi() {
+
 //        토론 주제에 대한 데이터들을 UI에 반영하는 함수.
-//        화면 초기 진입 실행 +
+//        화면 초기 진입 실행 + 서버에서 다시 받아왔을때도 실행.
+
         binding.txtTitle.text = mTopicData.title
         Glide.with(mContext).load(mTopicData.imageURL).into(binding.imgTopicBackground)
 
+//        1번진영 제목, 2번진영 제목
         binding.txtSide1.text = mTopicData.sideList[0].title
-        binding.txtSide2.text = mTopicData.sideList[0].title
+        binding.txtSide2.text = mTopicData.sideList[1].title
     }
     fun getTopicDetailFromServer() {
         ServerUtil.getRequestTopicDetail(mContext, mTopicData.id, object : ServerUtil.JsonResponseHandler{
