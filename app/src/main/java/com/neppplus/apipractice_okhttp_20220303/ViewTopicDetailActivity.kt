@@ -37,6 +37,11 @@ class ViewTopicDetailActivity : BaseActivity() {
     fun setTopicDataToUi() {
 //        토론 주제에 대한 데이터들을 UI에 반영하는 함수.
 //        화면 초기 진입 실행 +
+        binding.txtTitle.text = mTopicData.title
+        Glide.with(mContext).load(mTopicData.imageURL).into(binding.imgTopicBackground)
+
+        binding.txtSide1.text = mTopicData.sideList[0].title
+        binding.txtSide2.text = mTopicData.sideList[0].title
     }
     fun getTopicDetailFromServer() {
         ServerUtil.getRequestTopicDetail(mContext, mTopicData.id, object : ServerUtil.JsonResponseHandler{
@@ -48,6 +53,7 @@ class ViewTopicDetailActivity : BaseActivity() {
 
 //                변환된 객체를 mTopicData로 다시 대입 => UI 반영도 다시 실행.
                 mTopicData = topicData
+
                 runOnUiThread {
                     setTopicDataToUi()
                 }
