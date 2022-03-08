@@ -198,6 +198,7 @@ class ServerUtil {
         fun getRequestTopicDetail(context: Context, topicId:Int, handler : JsonResponseHandler? ) {
 
             val urlBuilder = "${BASE_URL}/topic/${topicId}".toHttpUrlOrNull()!!.newBuilder()
+                .addEncodedQueryParameter()
                 .build()
 
             val urlString = urlBuilder.toString()
