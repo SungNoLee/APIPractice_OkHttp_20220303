@@ -1,8 +1,9 @@
 package com.neppplus.apipractice_okhttp_20220303.datas
 
 import org.json.JSONObject
+import java.io.Serializable
 
-class UserData {
+class UserData  {
 
     var id = 0
     var email = ""

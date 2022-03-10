@@ -139,7 +139,7 @@ class ViewTopicDetailActivity : BaseActivity() {
 //                서버의 동작이므로 어댑터 세팅보다 늦게 끝날수 있다.(notifyDataSetChanged)
 
                 runOnUiThread {
-
+                    mAdapter.notifyDataSetChanged()
                 }
             }
 
