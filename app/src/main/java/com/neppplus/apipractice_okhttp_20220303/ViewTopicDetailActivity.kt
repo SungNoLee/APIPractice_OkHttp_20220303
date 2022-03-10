@@ -1,5 +1,6 @@
 package com.neppplus.apipractice_okhttp_20220303
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Adapter
@@ -34,8 +35,19 @@ class ViewTopicDetailActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+        binding.btnPostReply.setOnClickListener {
+            if (mTopicData.mySelectedSideData == null) {
+                Toast.makeText(mContext, "의견을 개진할 진영을 선택하셔야 합니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener   // return : 함수의 결과를 지정 => 그 뒤의 코드는
+            }
+            val myIntent = Intent(mContext, EditReplyActivity::class.java)
+            myIntent.putExtra("topic", mTopicData)
+            startActivity(myIntent)
+        }
 //        btnVote1 클릭 => 첫 진영의 id값을 찾아서 거기에 투표.
 //        서버에 전달 => API 활용
+
+
         binding.btnVote1.setOnClickListener {
 //            서버의 투표 API 호출
             ServerUtil.postRequestVote(mContext, mTopicData.sideList[0].id,object :ServerUtil.JsonResponseHandler{
