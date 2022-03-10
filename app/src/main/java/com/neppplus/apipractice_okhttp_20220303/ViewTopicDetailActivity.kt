@@ -71,7 +71,7 @@ class ViewTopicDetailActivity : BaseActivity() {
         mAdapter = ReplyAdapter(mContext, R.layout.reply_list_item, mReplyList)
         binding.replyListView.adapter = mAdapter
 
-        setTopicDataToUi()
+        // setTopicDataToUi()
 
         getTopicDetailFromServer()
     }

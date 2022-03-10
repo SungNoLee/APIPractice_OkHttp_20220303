@@ -11,6 +11,8 @@ import com.bumptech.glide.Glide
 import com.neppplus.apipractice_okhttp_20220303.R
 import com.neppplus.apipractice_okhttp_20220303.datas.ReplyData
 import com.neppplus.apipractice_okhttp_20220303.datas.TopicData
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ReplyAdapter(
     val mContext:Context,
@@ -31,11 +33,17 @@ class ReplyAdapter(
         val txtSelectedSide = row.findViewById<TextView>(R.id.txtSelectedSide)
         val txtWriterNickname = row.findViewById<TextView>(R.id.txtWriterNickname)
         val txtReplyContent = row.findViewById<TextView>(R.id.txtReplyCount)
+//        val txtCreateAt = row.findViewById<TextView>(R.id.txtCreatedAt)
 
         txtReplyContent.text = data.content
         txtWriterNickname.text = data.writer.nickname
         txtSelectedSide.text = "[${data.selectedSide.title}]"
 
+//        val sdf = SimpleDateFormat("yyyy-MM-dd")
+//
+//        txtCreateAt.text = sdf.format(data.createdAt.time)
+
+        // txtCreateAt.text = "${ data.createdAt.get(Calendar.YEAR)}-${ data.createdAt.get(Calendar.)}"
         return row
     }
 }
